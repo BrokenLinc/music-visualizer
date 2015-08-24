@@ -1,0 +1,13 @@
+{
+  "name": "musicviz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "axel": "0.0.3",
+    "midievents": "^1.0.0",
+    "midifile": "^1.0.1",
+    "player": "^0.5.0",
+    "yargs": "^3.15.0"
+  }
+}
