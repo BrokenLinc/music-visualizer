@@ -24,39 +24,12 @@ var songs = {
 //song selection
 var song = songs['uptown_funk'];
 
-
-
 var mp3_filepath = './media/'+song.mp3;
 var mid_filepath = './media/'+song.midi;
 var mp3_mid_offset = song.mp3_mid_offset; //negative delays the midi
 var mp3_mid_multiplier = song.mp3_mid_multiplier; //higher makes midi run faster
 
 var player = new Player(mp3_filepath);
-
-
-// // Your variable with an ArrayBuffer instance containing your MIDI events
-// var anyBuffer;
-
-// // MIDI events parser
-// var event, events=[], parser;
-// parser=new MIDIEvents.createParser(
-//   new DataView(anyBuffer),
-//     0, false);
-// event=parser.next();
-// do {
-//   events.push(event);
-//   event=parser.next();
-// } while(event);
-
-// // Check bufffer size before encoding
-// if(anyBuffer.length >= MIDIEvents.getRequiredBufferLength(events)) {
-//   console.log('ok');
-// }
-
-// // Encode MIDI events
-// var destination = new Uint8Array(anyBuffer);
-// MIDIEvents.writeToTrack(events, destination);
-
 
 // Read the log file into memory
 fs.readFile(mid_filepath, function (err, logData)
@@ -212,59 +185,3 @@ function playit(player, events) {
 function now() {
 	return new Date().getTime();
 }
-
-
-// function process_array_buffer(anyBuffer) {
-// 	var midiFile = new MIDIFile(anyBuffer);
-// 	var events = midiFile.getMidiEvents();
-// 	console.log(events.length);
-// 	for(var i=0; i<100; i+=1) {
-// 		console.log([
-// 			events[i].playTime,
-// 			events[i].subtype,
-// 			events[i].param1,
-// 			events[i].param2
-// 		].join(' : '));
-// 	}
-// }
-
-
-// Your variable with a ArrayBuffer instance containing your MIDI file
-// var anyBuffer;
-
-// // Creating the MIDIFile instance
-// var midiFile= new MIDIFile(anyBuffer);
-
-// // Reading headers
-// midiFile.header.getFormat(); // 0, 1 or 2
-// midiFile.header.getTracksCount(); // n
-// // Time division
-// if(midiFile.header.getTimeDivision()===MIDIFileHeader.TICKS_PER_BEAT) {
-//     midiFile.header.getTicksPerBit();
-// } else {
-//     midiFile.header.getSMPTEFrames();
-//     midiFile.header.getTicksPerFrame();
-// }
-
-// // MIDI events retriever
-// var events=midiFile.getMidiEvents();
-// events[0].subtype; // type of [MIDI event](https://github.com/nfroidure/MIDIFile/blob/master/src/MIDIFile.js#L34)
-// events[0].playTime; // time in ms at wich the event must be played
-// events[0].param1; // first parameter
-// events[0].param2; // second one
-
-// // Lyrics retriever
-// var lyrics=midiFile.getLyrics();
-// lyrics[0].playTime; // Time at wich the text must be displayed
-// lyrics[0].text; // The text content to be displayed
-
-// // Reading whole track events and filtering them yourself
-// var trackEventsChunk=midiFile.getTrackEvents(0),
-//     events=new MIDIFile.createParser(trackEventsChunk),
-//     event;
-// while(event=events.next()) {
-//     // Printing meta events containing text only
-//     if(event.type===MIDIFile.EVENT_META&&event.text) {
-//         console.log('Text meta: '+event.text);
-//     }
-// }
